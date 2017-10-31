@@ -1,3 +1,21 @@
 h1 {
   color: #444;
 }
+
+a {
+  color: green;
+  text-decoration: underline;
+}
+
+section {
+  width: calc(100% - 50px);
+  min-height: 400px;
+  border: 1px solid red;
+  padding: 25px;
+}
+
+section > section {
+  width: calc(100% - 50px);
+  height: 400px;
+  border: 1px solid blue;
+}

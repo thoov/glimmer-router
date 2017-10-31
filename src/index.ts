@@ -2,7 +2,6 @@ import App from './main';
 import { ComponentManager, setPropertyDidChange } from '@glimmer/component';
 
 const app = new App();
-const containerElement = document.getElementById('app');
 
 setPropertyDidChange(() => {
   app.scheduleRerender();
@@ -14,6 +13,11 @@ app.registerInitializer({
   }
 });
 
-app.renderComponent('glimmer-router', containerElement, null);
+/* Define your routes */
+app.defineRoutes([
+  { path: '/', component: 'glimmer-router' },
+  { path: '/emails', component: 'emails' },
+  { path: '/emails/compose', component: 'emails/compose' }
+]);
 
 app.boot();
