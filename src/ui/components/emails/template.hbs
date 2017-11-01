@@ -1,5 +1,9 @@
 <h1>I am a child route</h1>
 
-<a onclick={{action next}}>Lets go deeper</a>
+<a onclick={{action linkTo}}>Visit Compose Component</a>
 
-<section></section>
+<a onclick={{action linkToDynamic}}>Visit Dynamic Component (1234)</a>
+
+<a onclick={{action linkToDynamicFoo}}>Visit Dynamic Component (foo-bar-baz)</a>
+
+<section data-outlet="emails"></section>

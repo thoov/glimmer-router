@@ -30,19 +30,22 @@ export default class Router {
   urlChangeHandler() {
     const pathname = window.location.pathname;
     const results = this.router.recognize(pathname);
-    const yieldSections = document.getElementsByTagName('section');
+    const yieldSections = document.querySelectorAll('[data-outlet]');
     const componentName = results[0].handler();
     const nestedLevel = window.location.pathname.substr(1).split('/');
-
-    const containerElement = (yieldSections.length > 0 && pathname !== '/') ? yieldSections[nestedLevel.length - 1] : document.getElementById('app')
+    const containerElement = (yieldSections.length > 0 && pathname !== '/') ? yieldSections[nestedLevel.length - 1] : document.getElementById('app');
     containerElement.innerHTML = '';
-
-    console.log('Yield sections: ' + yieldSections.length);
-    console.log('Nested level: ' + nestedLevel.length);
-
-    // TODO: we will need to look at the results to determine if we need to remove a section
 
     this.app.renderComponent(componentName, containerElement, null);
   }
 
+  transitionTo(pathname: string, state = {}) {
+    const results = this.router.recognize(pathname);
+    state = Object.assign({}, state, results[0].params);
+    window.history.pushState(state, '', pathname);
+  }
+
+  params() {
+    return window.history.state;
+  }
 }

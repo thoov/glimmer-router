@@ -17,7 +17,8 @@ app.registerInitializer({
 app.defineRoutes([
   { path: '/', component: 'glimmer-router' },
   { path: '/emails', component: 'emails' },
-  { path: '/emails/compose', component: 'emails/compose' }
+  { path: '/emails/compose', component: 'emails/compose' },
+  { path: '/emails/:id', component: 'emails/view' }
 ]);
 
 app.boot();

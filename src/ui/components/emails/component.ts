@@ -1,7 +1,16 @@
 import Component from '@glimmer/component';
+import getRouter from '../../../utils/get-router';
 
 export default class GlimmerRouter extends Component {
-  next() {
-    window.history.pushState({}, "page 2", "/emails/compose");
+  linkTo() {
+    return getRouter(this).transitionTo('/emails/compose');
+  }
+
+  linkToDynamic() {
+    return getRouter(this).transitionTo('/emails/1234');
+  }
+
+  linkToDynamicFoo() {
+    return getRouter(this).transitionTo('/emails/foo-bar-baz');
   }
 }

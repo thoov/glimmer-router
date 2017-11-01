@@ -1,34 +1,71 @@
-# glimmer-router
+# Glimmer Router
 
-This README outlines the details of collaborating on this Glimmer application.
-A short introduction of this app could easily go here.
+This project is currently just a thought experiment and should be considered early alpha. This
+approach currently requires some hacks in order to work.
 
-## Prerequisites
+## How to Install
 
-You will need the following things properly installed on your computer.
+Currently a WIP.
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with NPM)
-* [Yarn](https://yarnpkg.com/en/)
-* [Ember CLI](https://ember-cli.com/)
+## Setup
 
-## Installation
+In `src/index.ts` you define your routes by calling `app.defineRoutes()` like so:
 
-* `git clone <repository-url>` this repository
-* `cd glimmer-router`
-* `yarn`
+```ts
+app.defineRoutes([
+  { path: '/', component: 'glimmer-router' },
+  { path: '/emails', component: 'emails' },
+  { path: '/emails/compose', component: 'emails/compose' },
+  { path: '/emails/:id', component: 'emails/view' }
+]);
+```
 
-## Running / Development
+## Usage
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+In order for you to start transitioning you must do two things. First, you must define where you want components to render into by defining an element with a `data-outlet` property.
 
-### Building
+```hbs
+<h1>Hi, I'm the parent component</h1>
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+<a onclick={{action linkTo}}>Link-To Child Route</a>
 
-## Further Reading / Useful Links
+<section data-outlet="glimmer-router"></section>
+```
 
-* [glimmerjs](http://github.com/tildeio/glimmer/)
-* [ember-cli](https://ember-cli.com/)
+Next, you create an action to call transitionTo passing in the path where you want to transition to. The component you have defined for this path (in app.defineRoutes) will be rendered into this `data-outlet` element.
+
+```ts
+import Component from '@glimmer/component';
+
+ // NOTE this will change to something absolute in the future
+import getRouter from '../../../utils/get-router';
+
+export default class GlimmerRouter extends Component {
+  linkTo() {
+    getRouter(this).transitionTo('/emails/1234');
+  }
+}
+```
+
+## Params
+
+If your route has dynamic segments then you grab them off of the router via the `getRouter(this).params()` method. This is different from say how ember passes props into the route directly.
+
+```ts
+import Component from '@glimmer/component';
+import getRouter from '../../../../utils/get-router';
+
+export default class GlimmerRouter extends Component {
+  get id() {
+    return getRouter(this).params().id;
+  }
+}
+```
+
+## Example
+
+Look within `/src` to see a simple nested routing example.
+
+## Future
+
+There are a lot of concepts and ideas that I do not have great solutions for at the moment. Mainly around a missing / lacking container system within glimmer. If you run into any issues or have ideas around different approaches I am all ears.
