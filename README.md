@@ -32,7 +32,7 @@ In order for you to start transitioning you must do two things. First, you must 
 <section data-outlet="glimmer-router"></section>
 ```
 
-Next, you create an action to call transitionTo passing in the path where you want to transition to. The component you have defined for this path (in app.defineRoutes) will be rendered into this `data-outlet` element.
+Note the name you give does not matter right now but in the future could be used similar to named outlets. Next, you call transitionTo off of the router by passing in the path where you want to transition to. The component you have defined for this path (in app.defineRoutes) will be rendered into this `data-outlet` element.
 
 ```ts
 import Component from '@glimmer/component';
