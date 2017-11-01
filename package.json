@@ -1,7 +1,15 @@
 {
   "name": "glimmer-router",
-  "version": "0.0.0",
-  "description": "A brand new Glimmer app.",
+  "version": "0.0.1",
+  "description": "Proof of concept routing in glimmer.js",
+  "keywords": [
+    "glimmerjs",
+    "routing",
+    "glimmer-router"
+  ],
+  "license": "MIT",
+  "author": "Travis Hoover <thoov7@gmail.com>",
+  "repository": "https://github.com/thoov/glimmer-router",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -31,7 +39,6 @@
   "engines": {
     "node": ">= 4.0"
   },
-  "private": true,
   "dependencies": {
     "route-recognizer": "^0.3.3"
   }
